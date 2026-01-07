@@ -5,6 +5,7 @@ import CourseList from "./pages/CourseList";
 import "./App.css";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
+import AddCourse from "./pages/AddCourse";
 const App = () => {
   let myRouter = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const App = () => {
         {
           path: "/signup",
           element: <SignUp />,
+        },
+        {
+          path: "/add",
+          element: <AddCourse />,
         },
         {
           path: "/login",

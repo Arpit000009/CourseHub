@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Auth } from "../context/AuthContext";
 
 const Navbar = () => {
+  let { user, logout } = useContext(Auth);
   const linkClasses =
     "px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200";
 
@@ -58,25 +60,31 @@ const Navbar = () => {
               Cart
             </NavLink>
 
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                `${linkClasses} ${
-                  isActive
-                    ? "bg-indigo-100 text-indigo-700"
-                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                }`
-              }
-            >
-              Login
-            </NavLink>
+            {user ? (
+              <button onClick={logout}></button>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `${linkClasses} ${
+                    isActive
+                      ? "bg-indigo-100 text-indigo-700"
+                      : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  }`
+                }
+              >
+                Login
+              </NavLink>
+            )}
 
-            <NavLink
-              to="/signup"
-              className="ml-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition"
-            >
-              Sign Up
-            </NavLink>
+            {!user && (
+              <NavLink
+                to="/signup"
+                className="ml-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition"
+              >
+                Sign Up
+              </NavLink>
+            )}
           </div>
         </div>
       </div>

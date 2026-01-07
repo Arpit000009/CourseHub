@@ -23,7 +23,8 @@ const Login = () => {
       let res = await axios.get(
         `http://localhost:3000/users?email=${email}&password=${password}&role=${role}`
       );
-      if (res.status == 200) {
+      if (res.data.length > 0) {
+        Login(res.data[0]);
         toast.success("SucessFully Logged In");
         navigate("/");
       }
